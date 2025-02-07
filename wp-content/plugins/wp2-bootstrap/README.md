@@ -41,11 +41,11 @@ WP2 CLI Bootstrap Controller is a WordPress plugin that adds WP-CLI commands to 
 2. Activate the plugin through the WordPress admin dashboard or via WP-CLI:
    ```bash
    wp plugin activate wp2-bootstrap/wp2-bootstrap.php
-
-	3.	(Optional) Define the webhook URL constant in your wp-config.php:
-
-define('WP2_BOOTSTRAP_WEBHOOK_URL', 'https://your-webhook-url.com');
-
+   ```
+3. (Optional) Define the webhook URL constant in your wp-config.php:
+   ```php
+   define('WP2_BOOTSTRAP_WEBHOOK_URL', 'https://your-webhook-url.com');
+   ```
 
 
 Usage
