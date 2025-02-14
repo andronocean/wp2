@@ -1,104 +1,117 @@
 # WP2
 
-## Overview
-
 > [!CAUTION]
 > This is a work in progress. The information provided is subject to change and the project is not yet ready for production use.
 
+## Overview
+
 WP2 is a powerful WordPress framework, an extensive block library, and a suite of custom modules. Designed for both developers and content creators, WP2 makes it easier than ever to build engaging, high-performance websites.
 
-[Wiki](https://coda.io/d/_dhf1XCbLnFn/README_su1cZv1O)
+## Getting Started
 
 ### Requirements
 
 - [InstaWP](https://app.instawp.io/register?ref=39TUWaLAzX) — Or any WordPress site supporting PHP X.0+ and WP 6.X
 - [Blockstudio](https://www.blockstudio.dev) — A tool for managing and creating custom blocks and more.
 
-## Components
+### Installation
 
-- [Core](./wp-content/plugins/wp2/README.md) is the foundation of WP2, providing essential functionality and utilities.
-- [Theme](./wp-content/themes/wp2/README.md) is block-based, primarily configuration-based theme tailored for full-site editing.
+The repository is structure mirrors the WordPress directory structure. WP2 works through must-use plugins, standard plugins, and themes. These coexist with a core WordPress installation.
 
-## Modules
+Within the `wp2-new` module, all configurations and preparations are handled automatically during the cloning process. If you are using InstaWP, the following post-creation commands prepare a newly cloned site:
+
+```bash
+wp cache flush
+wp eval 'file_put_contents(WP_CONTENT_DIR . "/debug.log", "");'
+wp wp2-new run
+```
+
+The site is created and commands are execute, site will be fully configured and ready for use.
+
+## Structure
 
 ### Daemons
 
-- [WP2 New](./wp-content/mu-plugins/wp2-new/README.md) - aids in the site cloning process.
-- [WP2 Studio](./wp-content/mu-plugins/wp2-studio/README.m) - an abstraction layer for Blockstudio.
+```bash
+.
+└── wp-content/
+    ├── mu-plugins/
+    │   ├── wp2.php
+    │   └── wp2-*/
+    │       └── src
+```
 
-### Plugins
+### Modules
 
-- [WP2 Core](./wp-content/plugins/wp2/README.md) - the foundation of WP2, providing essential functionality and utilities.
-- [WP2 Work](./wp-content/plugins/wp2-work/README.md) - a collection of tools working and collaborating beyond the WordPress ecosystem.
-- [WP2 Wiki](./wp-content/plugins/wp2-wiki/README.md) - a collection of tools for creating and managing documentation.
-- [WP2 New](./wp-content/mu-plugins/wp2-new/README.md) - aids in the site cloning process along with WP2 New Daemon.
-- [WP2 Directory](./wp-content/plugins/wp2-directory/README.md) - directory service with listings for WP2 resources, like modules, integrations, and more.
+```bash
+.
+└── wp-content/
+    ├── plugins/
+    │   ├── wp2*/
+    │   │   └── src/
+    │   │       ├── Assets/
+    │   │       │   ├── Scripts/
+    │   │       │   │   ├── global-scripts.js
+    │   │       │   │   ├── global-scripts-{inline|editor|view}.js
+    │   │       │   │   └── {block-editor|admin}-scripts.js
+    │   │       │   └── Styles/
+    │   │       │       ├── scss/
+    │   │       │       │   ├── Blocks
+    │   │       │       │   ├── Elements
+    │   │       │       │   ├── Templates
+    │   │       │       ├── global-styles.(s)css
+    │   │       │       ├── global-styles-{inline|editor|scoped}.(s)css
+    │   │       │       └── {block-editor|admin}-styles.(s)css
+    │   │       ├── Blocks/
+    │   │       │   ├── Namespaces/
+    │   │       │   │   ├── core
+    │   │       │   │   └── wp2*/
+    │   │       │   │       └── PascalCaseName/
+    │   │       │   │           ├── block.json
+    │   │       │   │           ├── *.(s)css
+    │   │       │   │           ├── *-{inline|editor|scoped}.(s)css
+    │   │       │   │           ├── *.js
+    │   │       │   │           ├── *-{inline|editor|view}.js
+    │   │       │   │           ├── index.php
+    │   │       │   │           └── init.php
+    │   │       │   └── Settings
+    │   │       ├── Catalogs
+    │   │       ├── Elements
+    │   │       ├── Helpers
+    │   │       ├── Syncs
+    │   │       ├── Templates
+    │   │       └── Types 
+    │   └── wp2*.php
+```
 
-## Blocks
+### Themes
 
-A rich collection of blocks is provided to help you build content quickly and effectively.
-
-### Structural Blocks
-
-[Root](./wp-content/plugins/wp2/src/Blocks/Namespaces/wp2/Root/README.md) | [Root Header](./wp-content/plugins/wp2/src/Blocks/Namespaces/wp2/RootHeader/README.md) | [Root Content](./wp-content/plugins/wp2/src/Blocks/Namespaces/wp2/RootContent/README.md) | [Root Footer](./wp-content/plugins/wp2/src/Blocks/Namespaces/wp2/RootFooter/README.md)
-
-### Site Blocks
-
- [Site Header](./wp-content/plugins/wp2/src/Blocks/Namespaces/wp2/SiteHeader/README.md) | [Site Content](./wp-content/plugins/wp2/src/Blocks/Namespaces/wp2/SiteContent/README.md) | [Site Footer](./wp-content/plugins/wp2/src/Blocks/Namespaces/wp2/SiteFooter/README.md)
-
-### Nav Blocks
-
-[Primary Nav](./wp-content/plugins/wp2/src/Blocks/Namespaces/wp2/NavPrimary/README.md) | [Secondary Nav](./wp-content/plugins/wp2/src/Blocks/Namespaces/wp2/NavSecondary/README.md)
-
-### Main Blocks
-
-[Main Header](./wp-content/plugins/wp2/src/Blocks/Namespaces/wp2/MainHeader/README.md) | [Main Content](./wp-content/plugins/wp2/src/Blocks/Namespaces/wp2/MainContent/README.md) | [Main Footer](./wp-content/plugins/wp2/src/Blocks/Namespaces/wp2/MainFooter/README.md)
-
-### Focus Blocks
-
-[Primary Focus](./wp-content/plugins/wp2/src/Blocks/Namespaces/wp2/PrimaryFocus/README.md) | [Secondary Focus](./wp-content/plugins/wp2/src/Blocks/Namespaces/wp2/SecondaryFocus/README.md)
-
-### Article Blocks
-
-[Article Header](./wp-content/plugins/wp2/src/Blocks/Namespaces/wp2/ArticleHeader/README.md) | [Article Content](./wp-content/plugins/wp2/src/Blocks/Namespaces/wp2/ArticleContent/README.md) | [Article Footer](./wp-content/plugins/wp2/src/Blocks/Namespaces/wp2/ArticleFooter/README.md)
-
-### Query Blocks
-
-[Query Header](./wp-content/plugins/wp2/src/Blocks/Namespaces/wp2/QueryHeader/README.md) | [Query Content](./wp-content/plugins/wp2/src/Blocks/Namespaces/wp2/QueryContent/README.md) | [Query Footer](./wp-content/plugins/wp2/src/Blocks/Namespaces/wp2/QueryFooter/README.md)
-
-### Dynamic Blocks
-
-#### Dynamic Site Blocks
-
-[Site Alert](./wp-content/plugins/wp2/src/Blocks/Namespaces/wp2/SiteAlert/README.md) | [Site Placement](./wp-content/plugins/wp2/src/Blocks/Namespaces/wp2/SitePlacement/README.md) | [Site Item](./wp-content/plugins/wp2/src/Blocks/Namespaces/wp2/SiteItem/README.md) | [Site Menu](./wp-content/plugins/wp2/src/Blocks/Namespaces/wp2/SiteMenu/README.md) | [Site Search](./wp-content/plugins/wp2/src/Blocks/Namespaces/wp2/SiteSearch/README.md) | [Site Brand](./wp-content/plugins/wp2/src/Blocks/Namespaces/wp2/SiteBrand/README.md)
-
-#### Dynamic Item Blocks
-
-[Item Title](./wp-content/plugins/wp2/src/Blocks/Namespaces/wp2/ItemTitle/README.md) [Item Subtitle](./wp-content/plugins/wp2/src/Blocks/Namespaces/wp2/ItemSubtitle/README.md) | [Item Term](./wp-content/plugins/wp2/src/Blocks/Namespaces/wp2/ItemTerm/README.md) | [Item Byline](./wp-content/plugins/wp2/src/Blocks/Namespaces/wp2/ItemByline/README.md) | [Item Dateline](./wp-content/plugins/wp2/src/Blocks/Namespaces/wp2/ItemDateline/README.md) | [Item Media](./wp-content/plugins/wp2/src/Blocks/Namespaces/wp2/ItemMedia/README.md) | [Item Cover](./wp-content/plugins/wp2/src/Blocks/Namespaces/wp2/ItemCover/README.md) | [Item Meta](./wp-content/plugins/wp2/src/Blocks/Namespaces/wp2/ItemMeta/README.md) | [Item Photo](./wp-content/plugins/wp2/src/Blocks/Namespaces/wp2/ItemPhoto/README.md) | [Item Content](./wp-content/plugins/wp2/src/Blocks/Namespaces/wp2/ItemContent/README.md) | [Item Share](./wp-content/plugins/wp2/src/Blocks/Namespaces/wp2/ItemShare/README.md)
-
-### Broadcast Blocks
-
-[Broadcast Header](./wp-content/plugins/wp2/src/Blocks/Namespaces/wp2/BroadcastHeader/README.md) [Broadcast Content](./wp-content/plugins/wp2/src/Blocks/Namespaces/wp2/BroadcastContent/README.md) [Broadcast Footer](./wp-content/plugins/wp2/src/Blocks/Namespaces/wp2/BroadcastFooter/README.md)
-
-### Utility Blocks
-
-[Stretched Link](./wp-content/plugins/wp2/src/Blocks/Namespaces/wp2/StretchedLink/README.md)
+```bash
+.
+└── wp-content/
+    ├── themes/
+    │   └── wp2/
+    │       ├── theme.json
+    │       ├── parts/
+    │       │   └── {template_zone}-part-{template}.html
+    │       └── templates/
+    │           ├── 404.html
+    │           ├── archive.html
+    │           ├── author.html
+    │           ├── front-page.html
+    │           ├── index.html
+    │           ├── page.html
+    │           ├── search.html
+    │           └── single.html
+```
 
 ## Next Steps
 
-We’re continuously improving WP2 and welcome your input. Here’s how you can help:
-
 ### Join
-
-Become a member of [WP2S](https://www.wp2s.com/join/).
 
 ### Sponsor
 
-Support ongoing development by sponsoring WP2. Every contribution helps us build a better tool for everyone.
-
 ### Collaborate
-
-Interested in contributing? Whether it’s bug reports, feature requests, or pull requests, your input is invaluable.
 
 ## Contact
 
