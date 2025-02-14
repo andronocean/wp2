@@ -1,12 +1,12 @@
-<?php
-// Path: wp-content/plugins/wp2-directory/src/Catalogs/Modules/Wiki/index.php
+        <?php
+        // Path: wp-content/plugins/wp2-directory/src/Catalogs/Modules/Wiki/index.php
 
-namespace WP2_Directory\Catalogs\Modules\Wiki;
+        namespace WP2_Directory\Catalogs\Modules\Wiki;
 
-$inner_blocks = sprintf(
-'<InnerBlocks useBlockProps tag="%s" class="%s"/>',
-'div',
-'wp2-module'
-);
+        $inner_blocks = sprintf(
+            '<InnerBlocks useBlockProps tag="%s" class="%s"/>',
+            'div',
+            'wp2-listing wp2-listing--module'
+        );
 
-echo $inner_blocks;
+        echo $inner_blocks;

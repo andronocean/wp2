@@ -105,6 +105,7 @@ class Controller
                 'slug' => 'undefined',
             ],
             'sort'              => true,
+            'show_in_rest'      => true,
         ];
 
         return $args;

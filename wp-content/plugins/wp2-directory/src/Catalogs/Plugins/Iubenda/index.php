@@ -1,12 +1,12 @@
-<?php
-// Path: wp-content/plugins/wp2-directory/src/Catalogs/Plugins/Iubenda/index.php
+        <?php
+        // Path: wp-content/plugins/wp2-directory/src/Catalogs/Plugins/Iubenda/index.php
 
-namespace WP2_Directory\Catalogs\Plugins\Iubenda;
+        namespace WP2_Directory\Catalogs\Plugins\Iubenda;
 
-$inner_blocks = sprintf(
-    '<InnerBlocks useBlockProps tag="%s" class="%s"/>',
-    'div',
-    'wp2-directory-plugin'
-);
+        $inner_blocks = sprintf(
+            '<InnerBlocks useBlockProps tag="%s" class="%s"/>',
+            'div',
+            'wp2-listing wp2-listing--plugin'
+        );
 
-echo $inner_blocks;
+        echo $inner_blocks;

@@ -43,6 +43,8 @@ class Controller
     public function __construct()
     {
         add_action('init', [$this, 'register_post_type'], 101);
+        add_action('rest_api_init', [$this, 'add_kinds_to_rest'], 101);
+        add_filter('rest_wp2_catalog_listing_query', [$this, 'filter_wp2_catalog_by_taxonomy_slug'], 10, 2);
     }
 
     /**
@@ -127,6 +129,8 @@ class Controller
             'capability_type'    => 'post',
             'has_archive'        => $archive,
             'hierarchical'       => true,
+            'rest_base'          => 'listings',
+            'rest_namespace'     => 'wp2-directory/v1',
             'supports'           => [
                 'title',
                 'editor',
@@ -139,6 +143,50 @@ class Controller
             ],
             'show_in_rest'       => true,
         ];
+    }
+
+    public function add_kinds_to_rest()
+    {
+        register_rest_field(
+            $this->single_key,
+            'wp2_catalog_kinds',
+            array(
+                'get_callback'    => [$this, 'get_kinds'],
+                'update_callback' => null,
+                'schema'          => null,
+            )
+        );
+    }
+
+    function filter_wp2_catalog_by_taxonomy_slug($args, $request)
+    {
+        $taxonomy = 'wp2_catalog_kind';
+        $param = $request->get_param('wp2_catalog_kinds');
+
+        if (!empty($param)) {
+            $args['tax_query'] = array(
+                array(
+                    'taxonomy' => $taxonomy,
+                    'field'    => 'slug',
+                    'terms'    => explode(',', $param),
+                ),
+            );
+        }
+
+        return $args;
+    }
+
+    public function get_kinds($object)
+    {
+        $taxonomy = 'wp2_catalog_kind';
+
+        $terms = get_the_terms($object['id'], $taxonomy);
+
+        if (empty($terms) || is_wp_error($terms)) {
+            return [];
+        }
+
+        return wp_list_pluck($terms, 'slug');
     }
 }
 
