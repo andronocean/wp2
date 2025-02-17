@@ -7,6 +7,8 @@
 
 WP2 is a powerful WordPress framework, an extensive block library, and a suite of custom modules. Designed for both developers and content creators, WP2 makes it easier than ever to build engaging, high-performance websites.
 
+Explore the [Wiki](https://coda.io/@vinnysgreen/wp2-wiki) 
+
 ## Getting Started
 
 ### Requirements
@@ -104,14 +106,6 @@ The site is created and commands are execute, site will be fully configured and 
     │           ├── search.html
     │           └── single.html
 ```
-
-## Next Steps
-
-### Join
-
-### Sponsor
-
-### Collaborate
 
 ## Contact
 
