@@ -19,7 +19,6 @@ class Controller
     {
         $this->entities = get_option($this->option_name, []);
         $posts = $this->prepare_entities_as_posts();
-        do_action('qm/debug', 'Entities ' . print_r($posts, true));
     }
 
     public function get_entity_posts()
@@ -47,14 +46,15 @@ class Controller
 
         foreach ($template_parts as $part) {
             $entities[] = [
-                'post_name'   => $part['template_part'] ?? '',
-                'post_title'  => $part['title'] ?? '',
-                'post_excerpt' => $part['description'] ?? '',
-                'template'    => $part['template'] ?? '',
-                'zone_area'   => $part['zone_area'] ?? '',
-                'zone'        => $part['zone'] ?? '',
-                'area'        => $part['area'] ?? '',
-                'layout'      => $part['layout'] ?? '',
+                'post_name'     => $part['template_part'] ?? '',
+                'post_title'    => $part['title'] ?? '',
+                'post_excerpt'  => $part['description'] ?? '',
+                'template'      => $part['template'] ?? '',
+                'zone_area'     => $part['zone_area'] ?? '',
+                'zone'          => $part['zone'] ?? '',
+                'area'          => $part['area'] ?? '',
+                'layout'        => $part['layout'] ?? '',
+                'template_part' => $part['template_part'] ?? '',
             ];
         }
 

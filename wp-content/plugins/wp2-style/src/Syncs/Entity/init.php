@@ -1,7 +1,7 @@
 <?php
 // Path: wp-content/plugins/wp2/src/Themes/Syncs/Entity/init.php
 
-namespace WP2_Themes\Syncs\Entity;
+namespace WP2_Style\Syncs\Entity;
 
 use WP2\Helpers\Event\ActionScheduler\Controller as ActionScheduler;
 use WP2_Style\Helpers\Entity\Controller as EntityController;
@@ -74,6 +74,15 @@ class Controller
             'post_title'   => $post_title,
             'post_content' => '<!-- wp:paragraph --><p>Not Needed</p><!-- /wp:paragraph -->',
             'post_excerpt' => $post_excerpt,
+        ];
+
+        $meta = [
+            'template'      => $process_payload['template'],
+            'zone_area'     => $process_payload['zone_area'],
+            'zone'          => $process_payload['zone'],
+            'area'          => $process_payload['area'],
+            'layout'        => $process_payload['layout'],
+            'template_part' => $process_payload['template_part'],
         ];
 
         // Construct meta keys for the upsert operation.
@@ -171,16 +180,3 @@ class Controller
 
 // Instantiate the plugin sync controller.
 new Controller();
-
-/**
- * Scheduled callback function for entity sync.
- *
- * This function is hooked to the async action.
- */
-function wp2_style_try_entities_sync(): void
-{
-    $controller = new Controller();
-    $controller->execute_sync();
-}
-
-add_action('wp2_style_entities_sync', __NAMESPACE__ . '\\wp2_style_try_entities_sync');

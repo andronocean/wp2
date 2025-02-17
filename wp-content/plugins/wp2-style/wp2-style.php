@@ -81,6 +81,7 @@ class Module
         $this->directories = [
             WP2_STYLE_DIR . '/src/Helpers',
             WP2_STYLE_DIR . '/src/Syncs',
+            WP2_STYLE_DIR . '/src/Settings',
             WP2_STYLE_DIR . '/src/Types',
         ];
     }
