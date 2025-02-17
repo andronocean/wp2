@@ -41,7 +41,7 @@ class Controller
         $updated_template_types = $this->process_template_types();
 
         // Merge taxonomy types with the defaults.
-        return array_merge($default_template_types, $updated_template_types);
+        return array_replace($default_template_types, $updated_template_types);
     }
 
     /**
@@ -74,7 +74,8 @@ class Controller
         $template_types = [];
 
         foreach ($terms as $term) {
-            $template_types[$term->slug] = [
+            // Cast the slug to string explicitly.
+            $template_types[(string) $term->slug] = [
                 'title'       => $term->name,
                 'description' => $term->description ?? '',
             ];
