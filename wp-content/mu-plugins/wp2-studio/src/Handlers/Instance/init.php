@@ -199,8 +199,6 @@ class Controller
         // filter out directories that belong to disabled plugins
         $directories = $this->filter_disabled_directories($directories);
 
-        do_action('qm/debug', 'WP2 Studio Instances ' . print_r($directories, true));
-
         foreach ($directories as $dir) {
             if (is_dir($dir)) {
                 \Blockstudio\Build::init([

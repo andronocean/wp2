@@ -1,12 +1,12 @@
-        <?php
-        // Path: wp-content/plugins/wp2-directory/src/Catalogs/Pages/Pricing/index.php
+<?php
+// Path: wp-content/plugins/wp2-directory/src/Catalogs/Pages/Pricing/index.php
 
-        namespace WP2_Directory\Catalogs\Pages\Pricing;
+namespace WP2_Directory\Catalogs\Pages\Pricing;
 
-        $inner_blocks = sprintf(
-            '<InnerBlocks useBlockProps tag="%s" class="%s"/>',
-            'div',
-            'wp2-listing wp2-listing--page'
-        );
+$inner_blocks = sprintf(
+    '<InnerBlocks useBlockProps tag="%s" class="%s"/>',
+    'div',
+    'wp2-listing wp2-listing--page'
+);
 
-        echo $inner_blocks;
+echo $inner_blocks;

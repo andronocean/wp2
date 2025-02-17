@@ -54,6 +54,20 @@ class Controller
 
         $query->set('post_type', $this->post_types);
     }
+
+    /**
+     * Defines Archive templates.
+     */
+    private function archive_templates()
+    {
+        return [
+            $this->create_template(
+                'archive',
+                'Archive: Fallback',
+                'The fallback template type for archive views.'
+            ),
+        ];
+    }
 }
 
 /**

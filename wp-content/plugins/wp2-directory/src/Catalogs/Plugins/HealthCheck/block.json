@@ -1,8 +1,8 @@
-        {
-            "$schema": "https://app.blockstudio.dev/schema",
-            "apiVersion": 2,
-            "name": "wp2-directory/health-check",
-            "title": "Health Check",
-            "ancestor": ["wp2-directory/catalog"],
-            "blockstudio": true
-        }
+{
+    "$schema": "https://app.blockstudio.dev/schema",
+    "apiVersion": 2,
+    "name": "wp2-directory/health-check",
+    "title": "Health Check",
+    "ancestor": ["wp2-directory/catalog"],
+    "blockstudio": true
+}
