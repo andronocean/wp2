@@ -1,0 +1,9 @@
+{
+    "$schema": "https://app.blockstudio.dev/schema",
+    "apiVersion": 2,
+    "name": "wp2-directory/not-found-404",
+    "description": "404",
+    "title": "404",
+    "ancestor": ["wp2-directory/catalog"],
+    "blockstudio": true
+}

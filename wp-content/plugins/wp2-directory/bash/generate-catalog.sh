@@ -66,30 +66,30 @@ for dir in */; do
 
     # Overwrite index.php using the fixed path comment and the directory name for the namespace
     cat >"$index_path" <<EOF
-        <?php
-        // Path: wp-content/plugins/wp2-directory/src/Catalogs/${parent_dir}/${dir_name}/index.php
+<?php
+// Path: wp-content/plugins/wp2-directory/src/Catalogs/${parent_dir}/${dir_name}/index.php
 
-        namespace WP2_Directory\Catalogs\\${parent_dir}\\${dir_name};
+namespace WP2_Directory\Catalogs\\${parent_dir}\\${dir_name};
 
-        \$inner_blocks = sprintf(
-            '<InnerBlocks useBlockProps tag="%s" class="%s"/>',
-            'div',
-            '${block_class}'
-        );
+\$inner_blocks = sprintf(
+    '<InnerBlocks useBlockProps tag="%s" class="%s"/>',
+    'div',
+    '${block_class}'
+);
 
-        echo \$inner_blocks;
+echo \$inner_blocks;
 EOF
 
     # Overwrite block.json with the transformed title and slug appended to the name value
     cat >"$block_json_path" <<EOF
-        {
-            "\$schema": "https://app.blockstudio.dev/schema",
-            "apiVersion": 2,
-            "name": "${block_name}",
-            "title": "${title}",
-            "ancestor": ["wp2-directory/catalog"],
-            "blockstudio": true
-        }
+{
+    "\$schema": "https://app.blockstudio.dev/schema",
+    "apiVersion": 2,
+    "name": "${block_name}",
+    "title": "${title}",
+    "ancestor": ["wp2-directory/catalog"],
+    "blockstudio": true
+}
 EOF
 
     # Overwrite README.md using the Title (PascalCase transformed with spaces)

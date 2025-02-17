@@ -1,12 +1,12 @@
-        <?php
-        // Path: wp-content/plugins/wp2-directory/src/Catalogs/Integrations/Shopify/index.php
+<?php
+// Path: wp-content/plugins/wp2-directory/src/Catalogs/Integrations/Shopify/index.php
 
-        namespace WP2_Directory\Catalogs\Integrations\Shopify;
+namespace WP2_Directory\Catalogs\Integrations\Shopify;
 
-        $inner_blocks = sprintf(
-            '<InnerBlocks useBlockProps tag="%s" class="%s"/>',
-            'div',
-            'wp2-listing wp2-listing--integration'
-        );
+$inner_blocks = sprintf(
+    '<InnerBlocks useBlockProps tag="%s" class="%s"/>',
+    'div',
+    'wp2-listing wp2-listing--integration'
+);
 
-        echo $inner_blocks;
+echo $inner_blocks;

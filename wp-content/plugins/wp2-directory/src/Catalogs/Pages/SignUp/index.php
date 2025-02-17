@@ -1,12 +1,12 @@
-        <?php
-        // Path: wp-content/plugins/wp2-directory/src/Catalogs/Pages/SignUp/index.php
+<?php
+// Path: wp-content/plugins/wp2-directory/src/Catalogs/Pages/SignUp/index.php
 
-        namespace WP2_Directory\Catalogs\Pages\SignUp;
+namespace WP2_Directory\Catalogs\Pages\SignUp;
 
-        $inner_blocks = sprintf(
-            '<InnerBlocks useBlockProps tag="%s" class="%s"/>',
-            'div',
-            'wp2-listing wp2-listing--page'
-        );
+$inner_blocks = sprintf(
+    '<InnerBlocks useBlockProps tag="%s" class="%s"/>',
+    'div',
+    'wp2-listing wp2-listing--page'
+);
 
-        echo $inner_blocks;
+echo $inner_blocks;
