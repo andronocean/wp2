@@ -79,6 +79,7 @@ class Controller
                     'slug' => $term->slug,
                     'name' => $term->name,
                     'file' => $term->slug . '.html',
+                    'id'   => $term->term_id,
                 ];
             }
         }
@@ -97,9 +98,9 @@ class Controller
     private function create_theme_template_file(array $template): void
     {
         $file_path = trailingslashit(get_template_directory()) . 'templates/' . $template['file'];
-        $markup    = $this->generate_theme_html_markup($template['slug'], 'templates');
+        $markup    = $this->generate_theme_html_markup($template);
 
-        file_put_contents($file_path, '');
+        file_put_contents($file_path, $markup);
     }
 
     /**
@@ -110,57 +111,55 @@ class Controller
      *
      * @return string
      */
-    private function generate_theme_html_markup(string $template_slug, string $zone): string
+    private function generate_theme_html_markup($template): string
     {
-        $part      = $zone;
-        $slug      = "";
-        $className = "";
 
-        $template = [
-            'value' => $template_slug,
-            'label' => ucfirst(str_replace('-', ' ', $template_slug))
-        ];
-
-        $theme_zone = [
-            'value' => $zone,
-            'label' => ucfirst($zone)
-        ];
-
-        $theme_area = [
-            'value' => $part,
-            'label' => ucfirst($part)
-        ];
+        $slug       = $template['slug'];
+        $name       = $template['name'];
+        $term_id    = $template['id'];
+        $class_name = "wp2-root";
 
         $lock = ['move' => true, 'remove' => true];
 
-        $attributes = [
-            'slug'       => $slug,
-            'lock'       => $lock,
-            'className'  => $className,
-            'template'   => $template,
-            'theme_zone' => $theme_zone,
-            'theme_area' => $theme_area,
-            'blockstudio' => [
-                'attributes' => [
-                    "0"         => "o",
-                    'slug'      => $slug,
-                    'lock'      => $lock,
-                    'className' => $className,
-                    'blockstudio' => [
-                        'data' => [
-                            'template'   => $template,
-                            'theme_zone' => $theme_zone,
-                            'theme_area' => $theme_area,
-                        ],
-                    ],
-                    'template'   => $template,
-                    'theme_zone' => $theme_zone,
-                    'theme_area' => $theme_area,
-                ],
-            ],
+        $option = [
+            'value' => $slug,
+            'label' => $name
         ];
 
-        return $this->markup_template_part($attributes);
+        $metadata = [
+            'name' => $name
+        ];
+
+        $attributes = [
+            "className" => $class_name,
+            "metadata" => [
+                "name" => $name
+            ],
+            "blockstudio" => [
+                "attributes" => [
+                    "0" => "o",
+                    "slug" => $slug,
+                    "lock" => $lock,
+                    "className" => $class_name,
+                    "blockstudio" => [
+                        "data" => [
+                            "option" => [
+                                "value" => $slug,
+                                "label" => $name
+                            ]
+                        ]
+                    ],
+                    "option" => [
+                        "value" => $term_id,
+                        "label" => $name
+                    ]
+                ]
+            ]
+        ];
+
+        $inner_content = $this->get_zone_template_parts($slug, 'root');
+
+        return $this->markup_template_part($attributes, $inner_content);
     }
 
     /**
@@ -170,11 +169,53 @@ class Controller
      *
      * @return string
      */
-    private function markup_template_part(array $attributes): string
+    private function markup_template_part(array $attributes, string $inner_content = ''): string
     {
         return sprintf(
-            "<!-- wp:template-part %s /-->",
-            json_encode($attributes, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT)
+            "<!-- wp:wp2/root %s -->%s<!-- /wp:wp2/root -->",
+            json_encode($attributes, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT),
+            $inner_content
         );
+    }
+
+    private function get_zone_template_parts($template_slug, $zone_slug)
+    {
+        $template_parts_markup = '';
+
+        $posts = get_posts([
+            'post_type' => 'wp2_style_entity',
+            'post_status' => 'publish',
+            'tax_query' => [
+                [
+                    'taxonomy' => 'wp2_style_theme_zone',
+                    'field'    => 'slug',
+                    'terms'    => $zone_slug,
+                ],
+                [
+                    'taxonomy' => 'wp2_style_theme_template',
+                    'field'    => 'slug',
+                    'terms'    => $template_slug,
+                ],
+            ],
+            'orderby' => 'menu_order',
+            'order' => 'ASC',
+        ]);
+
+        foreach ($posts as $post) {
+
+            $template_part = get_post_meta($post->ID, 'wp2_style_entity_template_part', true);
+
+            $attributes = [
+                'slug' => $template_part,
+                'lock' => ['move' => true, 'remove' => true],
+            ];
+
+            $template_parts_markup .= sprintf(
+                '<!-- wp:template-part %s --><!-- /wp:template-part -->',
+                json_encode($attributes, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT),
+            );
+        }
+
+        return $template_parts_markup;
     }
 }

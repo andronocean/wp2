@@ -155,6 +155,8 @@ class Controller
             'rewrite'           => ['slug' => $slug],
             'sort'              => true,
             'show_in_rest'      => true,
+            'rest_base'         => $slug,
+            'rest_namespace'   => 'wp2-style/v1',
         ];
     }
 }

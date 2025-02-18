@@ -72,7 +72,7 @@ class Controller
             'post_type'    => $post_type,
             'post_status'  => 'publish',
             'post_title'   => $post_title,
-            'post_content' => '<!-- wp:paragraph --><p>Not Needed</p><!-- /wp:paragraph -->',
+            'post_content' => '<!-- wp:group {"lock":{"move":true,"remove":true},"align":"full","layout":{"type":"constrained"}} --><div class="wp-block-group alignfull"></div><!-- /wp:group -->',
             'post_excerpt' => $post_excerpt,
         ];
 
