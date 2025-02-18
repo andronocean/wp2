@@ -1,8 +1,10 @@
 {
     "$schema": "https://app.blockstudio.dev/schema",
     "apiVersion": 2,
-    "name": "wp2-directory/core",
+    "name": "wp2-module/core",
     "title": "Core",
-    "ancestor": ["wp2-directory/catalog"],
+    "ancestor": [
+        "wp2-directory/catalog"
+    ],
     "blockstudio": true
 }

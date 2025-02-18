@@ -83,12 +83,24 @@ class Controller
 
         if (! empty($posts)) {
             foreach ($posts as $post) {
+
+                $unfiltered_content = get_the_content(null, false, $post);
+
                 $template_parts[] = [
-                    'slug'              => $post->post_name,
-                    'name'              => $post->post_title,
+                    'slug'          => $post->post_name,
+                    'name'          => $post->post_title,
+                    'content'       => $unfiltered_content,
+                    'template'      => null,
+                    'zone_area'     => null,
+                    'zone'          => null,
+                    'area'          => null,
+                    'layout'        => null,
+                    'template_part' => null,
+                    'class_name'    => null,
                 ];
 
                 $meta = get_post_meta($post->ID);
+
                 foreach ($meta as $key => $value) {
                     if (strpos($key, 'wp2_style_entity_') === 0) {
                         $key = str_replace('wp2_style_entity_', '', $key);
@@ -112,10 +124,7 @@ class Controller
     private function create_theme_template_part_file(array $part): void
     {
         $filename         = $part['template_part'];
-
         $file_path        = trailingslashit(get_template_directory()) . 'parts/' . $filename . '.html';
-        $class_name       = $part['slug'];
-        $wrapper_name     = $part['name'];
 
         $this->create_part_file($file_path, $part);
     }
@@ -136,43 +145,72 @@ class Controller
         string $file_path,
         array $part
     ): void {
-        $class_name     = $part['slug'];
-        $wrapper_name   = $part['name'];
-        $template       = $part['template'];
-        $template_zone  = $part['zone_area'];
 
-        $attributes = json_encode([
-            'zone_area' => $template_zone,
-        ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+        $contents = $this->build_block($part);
 
-        $group_attributes = json_encode([
-            'lock'      => ['move' => true, 'remove' => true],
-            'className' => $class_name,
-            'metadata'  => ['name' => $wrapper_name],
-            'layout'    => ['type' => 'constrained'],
-        ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-
-        $inner_content = $this->generate_part_content($template, $attributes);
-
-        $wrapper = sprintf(
-            '<!-- wp:group %s --><div class="wp-block-group">%s</div><!-- /wp:group -->',
-            $group_attributes,
-            $inner_content
-        );
-
-        file_put_contents($file_path, '');
+        file_put_contents($file_path, $contents);
     }
 
-    /**
-     * Generate inner content for a template part.
-     *
-     * @param string $template   The template content.
-     * @param string $attributes The attributes to inject.
-     *
-     * @return string
-     */
-    private function generate_part_content(string $template, string $attributes): string
+    private function build_block(array $part): string
     {
-        return sprintf($template, $attributes);
+        $wrapper_attributes = $this->get_wrapper_attributes($part);
+        $content_attributes = $this->get_content_attributes($part);
+
+        $content = $this->generate_inner_content($part, $content_attributes);
+
+        return sprintf(
+            '<!-- wp:group %s --><div class="wp-block-group">%s</div><!-- /wp:group -->',
+            json_encode($wrapper_attributes, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT),
+            $content
+        );
+    }
+
+    private function generate_inner_content(array $part, array $content_attributes): string
+    {
+        $content = $part['content'] ?? '';
+        return sprintf(
+            $content,
+            json_encode($content_attributes, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT),
+            ''
+        );
+    }
+
+    private function get_content_attributes(array $part): array
+    {
+        return [
+            'lock' => ['move' => true, 'remove' => true],
+        ];
+    }
+
+    private function get_wrapper_attributes(array $part): array
+    {
+        $name       = $part['name'] ?? $part['slug'];
+        $class_name = $this->get_class_name($part);
+        return [
+            'lock'      => ['move' => true, 'remove' => true],
+            'className' => $class_name,
+            'metadata'  => [
+                'name' => 'Template Content',
+            ],
+            'layout'    => ['type' => 'constrained'],
+        ];
+    }
+
+    private function get_class_name(array $part): string
+    {
+        $prefix = 'wp2-part--';
+        $classes = [
+            'wp2-part',
+            $prefix . $part['template'],
+            $prefix . $part['zone_area'],
+            $prefix . $part['zone'],
+            $prefix . $part['area'],
+            $prefix . $part['layout'],
+            $prefix . $part['template_part'],
+        ];
+
+        $class_name = implode(' ', $classes);
+
+        return $class_name;
     }
 }

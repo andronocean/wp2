@@ -84,7 +84,7 @@ class Controller
      *
      * @var string
      */
-    private string $rest_base = 'entities';
+    private string $rest_base = 'template-parts';
 
     /**
      * Constructor.
@@ -94,6 +94,7 @@ class Controller
     public function __construct()
     {
         add_action('init', [$this, 'register_post_type'], 101);
+        add_action('init', [$this, 'register_meta'], 102);
     }
 
     /**
@@ -210,6 +211,33 @@ class Controller
             ],
             'show_in_rest'       => true,
         ];
+    }
+
+
+    public function register_meta()
+    {
+        $post_type = 'wp2_style_entity';
+
+        $prefix = 'wp2_style_entity_';
+
+        $meta_keys = [
+            'template',
+            'zone_area',
+            'zone',
+            'area',
+            'layout',
+            'template_part',
+        ];
+
+
+        foreach ($meta_keys as $meta_key) {
+            $key = $prefix . $meta_key;
+            register_post_meta($post_type, $key, [
+                'show_in_rest' => true,
+                'single'       => true,
+                'type'         => 'string',
+            ]);
+        }
     }
 }
 

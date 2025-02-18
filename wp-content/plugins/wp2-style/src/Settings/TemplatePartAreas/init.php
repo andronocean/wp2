@@ -97,7 +97,7 @@ class Controller
         $posts = get_posts([
             'post_type'   => $this->post_type,
             'numberposts' => -1,
-            'post_status' => 'publish',
+            'post_status' => 'any',
         ]);
 
         $template_parts = [];
