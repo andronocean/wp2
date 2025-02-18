@@ -5,109 +5,38 @@
 
 ## Overview
 
-WP2 is a powerful WordPress framework, an extensive block library, and a suite of custom modules. Designed for both developers and content creators, WP2 makes it easier than ever to build engaging, high-performance websites.
+WP2 is an innovative project designed to simplify the creation and management of WordPress websites. Built on top of the WordPress platform and Blockstudio, WP2 offers a powerful yet straightforward environment for developing custom solutions using PHP-based blocks.
 
-Explore the [Wiki](https://coda.io/@vinnysgreen/wp2-wiki) 
+## Project Structure
 
-## Getting Started
+WP2 mirrors the structure of WordPress core by combining the wp2 repository with a wp-content folder. Every new solution is built as a module that spans across the mu-plugins, plugins, themes, or uploads folders. Together, these elements form the blueprint for a comprehensive, turnkey WordPress solution.
 
-### Requirements
+## Usage
 
-- [InstaWP](https://app.instawp.io/register?ref=39TUWaLAzX) — Or any WordPress site supporting PHP X.0+ and WP 6.X
-- [Blockstudio](https://www.blockstudio.dev) — A tool for managing and creating custom blocks and more.
+WP2 is optimized for one-click installation and cloning experiences. WP2 Modules can be initialized and configured to meet your organization’s specific needs, offering a robust boilerplate that serves as the best starting point for any project. This approach allows you to hit the ground running while still enabling further customization as your project evolves.
 
-### Installation
+## Features
 
-The repository is structure mirrors the WordPress directory structure. WP2 works through must-use plugins, standard plugins, and themes. These coexist with a core WordPress installation.
+- **Modular Architecture:** WP2 Modules are self-contained, reusable pieces of functionality that can be easily added or removed from your WordPress site, ensuring scalability and maintainability.
+- **PHP-Only Block Creation:** Develop custom WordPress blocks using PHP with the standardized block.json format.
+- **Core Focused:** Utilize WordPress core and Gutenberg components without any hidden complexities.
+- **Server-Side Rendering:** Benefit from PHP templates for dynamic blocks, while enjoying enhanced editor interactivity through JSX-like tags.
+- **File System-Based Registration:** Automatically register blocks and their assets (CSS, JS, templates) based on a structured file system.
+- **Zero-Setup Workflow:** Seamlessly enqueue assets and support various template engines (e.g., Twig) by simply renaming file extensions.
+- **Customizable:** Tailor the boilerplate to your organization’s needs, ensuring a perfect fit for your projects.
+- **Documentation:** Access comprehensive documentation directly from the WordPress admin interface.
+- **Version Control:** Easily manage and track changes to your modules using Git.
 
-Within the `wp2-new` module, all configurations and preparations are handled automatically during the cloning process. If you are using InstaWP, the following post-creation commands prepare a newly cloned site:
+## Documentation
 
-```bash
-wp cache flush
-wp eval 'file_put_contents(WP_CONTENT_DIR . "/debug.log", "");'
-wp wp2-new run
-```
+Each directory within WP2 comes with its own Markdown-based README.md file to keep documentation current and easily accessible. Additionally, the WP2 Wiki module aggregates this documentation into a virtualized format that you can access directly from WordPress.
 
-The site is created and commands are execute, site will be fully configured and ready for use.
-
-## Structure
-
-### Daemons
-
-```bash
-.
-└── wp-content/
-    ├── mu-plugins/
-    │   ├── wp2.php
-    │   └── wp2-*/
-    │       └── src
-```
-
-### Modules
-
-```bash
-.
-└── wp-content/
-    ├── plugins/
-    │   ├── wp2*/
-    │   │   └── src/
-    │   │       ├── Assets/
-    │   │       │   ├── Scripts/
-    │   │       │   │   ├── global-scripts.js
-    │   │       │   │   ├── global-scripts-{inline|editor|view}.js
-    │   │       │   │   └── {block-editor|admin}-scripts.js
-    │   │       │   └── Styles/
-    │   │       │       ├── scss/
-    │   │       │       │   ├── Blocks
-    │   │       │       │   ├── Elements
-    │   │       │       │   ├── Templates
-    │   │       │       ├── global-styles.(s)css
-    │   │       │       ├── global-styles-{inline|editor|scoped}.(s)css
-    │   │       │       └── {block-editor|admin}-styles.(s)css
-    │   │       ├── Blocks/
-    │   │       │   ├── Namespaces/
-    │   │       │   │   ├── core
-    │   │       │   │   └── wp2*/
-    │   │       │   │       └── PascalCaseName/
-    │   │       │   │           ├── block.json
-    │   │       │   │           ├── *.(s)css
-    │   │       │   │           ├── *-{inline|editor|scoped}.(s)css
-    │   │       │   │           ├── *.js
-    │   │       │   │           ├── *-{inline|editor|view}.js
-    │   │       │   │           ├── index.php
-    │   │       │   │           └── init.php
-    │   │       │   └── Settings
-    │   │       ├── Catalogs
-    │   │       ├── Elements
-    │   │       ├── Helpers
-    │   │       ├── Syncs
-    │   │       ├── Templates
-    │   │       └── Types 
-    │   └── wp2*.php
-```
-
-### Themes
-
-```bash
-.
-└── wp-content/
-    ├── themes/
-    │   └── wp2/
-    │       ├── theme.json
-    │       ├── parts/
-    │       │   └── {template_zone}-part-{template}.html
-    │       └── templates/
-    │           ├── 404.html
-    │           ├── archive.html
-    │           ├── author.html
-    │           ├── front-page.html
-    │           ├── index.html
-    │           ├── page.html
-    │           ├── search.html
-    │           └── single.html
-```
+Explore the project by visiting each directory and reviewing the corresponding README.md files for detailed insights into every module and feature.
 
 ## Contact
 
-Have questions or need support? Reach out:
-Email: [wp2@wp2s.com](mailto:hello+wp2@wp2s.com)
+Contact Vinny Green for more information on how to get started with WP2.
+
+## Sponsor
+
+If you find WP2 useful, please consider sponsoring the project to help support its development and maintenance.
