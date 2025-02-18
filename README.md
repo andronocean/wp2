@@ -29,9 +29,14 @@ WP2 is optimized for one-click installation and cloning experiences. WP2 Modules
 
 ## Documentation
 
-Each directory within WP2 comes with its own Markdown-based README.md file to keep documentation current and easily accessible. Additionally, the WP2 Wiki module aggregates this documentation into a virtualized format that you can access directly from WordPress.
+Each directory within WP2 comes with its own Markdown-based README.md file to keep documentation current and easily accessible. Explore the project by visiting each directory and reviewing the corresponding README.md files for detailed insights into every module and feature. 
 
-Explore the project by visiting each directory and reviewing the corresponding README.md files for detailed insights into every module and feature.
+A more comprehensive and dynamic resource is found in the [Public Wiki](https://wiki.wp2s.com/).
+
+## Modules
+
+- **WP2 Core:** 
+- **WP2 Wiki:** aggregates this documentation into a virtualized format that you can access directly from WordPress.
 
 ## Contact
 
