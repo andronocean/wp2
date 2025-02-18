@@ -1,11 +1,11 @@
 {
     "$schema": "https://app.blockstudio.dev/schema",
     "apiVersion": 2,
-    "name": "wp2/site-content",
-    "title": "Site Content",
-    "category": "wp2-root",
+    "name": "wp2/content",
+    "title": "Content",
+    "category": "wp2-style",
     "icon": "table-row-after",
-    "description": "Display the site content",
+    "description": "Display the content",
     "supports": {
         "align": [
             "wide",
@@ -74,9 +74,9 @@
                                 "name": "core/group",
                                 "attributes": {
                                     "metadata": {
-                                        "name": "Site Content Wrapper"
+                                        "name": "Main Content Wrapper"
                                     },
-                                    "className": "wp2-wrapper wp2-wrapper--site-content",
+                                    "className": "wp2-wrapper wp2-wrapper--main-content",
                                     "align": "full",
                                     "layout": {
                                         "type": "constrained"
