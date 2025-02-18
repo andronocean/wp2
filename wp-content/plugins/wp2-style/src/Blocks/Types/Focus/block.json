@@ -1,11 +1,11 @@
 {
     "$schema": "https://app.blockstudio.dev/schema",
     "apiVersion": 2,
-    "name": "wp2/secondary",
-    "title": "Secondary Content",
-    "category": "wp2-content",
+    "name": "wp2/focus",
+    "title": "Focus",
+    "category": "wp2-style",
     "icon": "table-row-after",
-    "description": "Display the secondary content",
+    "description": "Display the focus",
     "supports": {
         "align": [
             "wide",
@@ -63,7 +63,7 @@
                 "id": "option",
                 "type": "select",
                 "label": "Option",
-                "help": "Select the secondary content to display.",
+                "help": "Select the primary content to display.",
                 "allowNull": "Select Option",
                 "options": [
                     {
@@ -74,9 +74,9 @@
                                 "name": "core/group",
                                 "attributes": {
                                     "metadata": {
-                                        "name": "Secondary Content Wrapper"
+                                        "name": "Primary Content Wrapper"
                                     },
-                                    "className": "wp2-wrapper wp2-wrapper--secondary-content",
+                                    "className": "wp2-wrapper wp2-wrapper--primary-content",
                                     "align": "full",
                                     "layout": {
                                         "type": "constrained"

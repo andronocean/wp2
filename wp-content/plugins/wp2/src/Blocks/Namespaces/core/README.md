@@ -1,3 +1,0 @@
-# Core Blocks
-
-## Template Part

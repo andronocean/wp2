@@ -178,7 +178,7 @@ class Controller
     private function get_content_attributes(array $part): array
     {
         return [
-            'lock' => ['move' => true, 'remove' => true],
+            'lock' => ['move' => false, 'remove' => false],
         ];
     }
 

@@ -119,7 +119,7 @@ class Controller
         $term_id    = $template['id'];
         $class_name = "wp2-root";
 
-        $lock = ['move' => true, 'remove' => true];
+        $lock = ['move' => false, 'remove' => false];
 
         $option = [
             'value' => $slug,
@@ -150,7 +150,7 @@ class Controller
                         ]
                     ],
                     "option" => [
-                        "value" => $term_id,
+                        "value" => $slug,
                         "label" => $name
                     ]
                 ]
@@ -207,7 +207,7 @@ class Controller
 
             $attributes = [
                 'slug' => $template_part,
-                'lock' => ['move' => true, 'remove' => true],
+                'lock' => ['move' => false, 'remove' => false],
             ];
 
             $template_parts_markup .= sprintf(
