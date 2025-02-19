@@ -49,9 +49,8 @@ class Module
      */
     private $directories = [
         WP2_CORE_DIR . '/src/Assets',
-        WP2_CORE_DIR . '/src/Blocks/Namespaces/core',
-        WP2_CORE_DIR . '/src/Blocks/Namespaces/wp2',
         WP2_CORE_DIR . '/src/Blocks/Settings',
+        WP2_CORE_DIR . '/src/Blocks/Types',
         WP2_CORE_DIR . '/src/Elements',
         WP2_CORE_DIR . '/src/Helpers',
         WP2_CORE_DIR . '/src/Templates',

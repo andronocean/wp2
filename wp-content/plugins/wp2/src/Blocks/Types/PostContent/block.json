@@ -1,11 +1,11 @@
 {
     "$schema": "https://app.blockstudio.dev/schema",
     "apiVersion": 2,
-    "name": "wp2/article-content",
+    "name": "wp2/post-content",
     "title": "Content",
-    "category": "wp2-article",
+    "category": "wp2-post",
     "icon": "editor-insertmore",
-    "description": "Display the article content",
+    "description": "Display the post content",
     "allowedBlocks": [
         "core/group",
         "core/post-content"

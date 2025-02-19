@@ -1,11 +1,11 @@
 {
     "$schema": "https://app.blockstudio.dev/schema",
     "apiVersion": 2,
-    "name": "wp2/article-header",
+    "name": "wp2/post-header",
     "title": "Header",
-    "category": "wp2-article",
+    "category": "wp2-post",
     "icon": "table-row-before",
-    "description": "Display the article header",
+    "description": "Display the post header",
     "allowedBlocks": [
         "core/group",
         "wp2/item-media",
