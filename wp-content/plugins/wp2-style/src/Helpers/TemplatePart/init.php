@@ -293,4 +293,4 @@ class Controller
     }
 }
 
-$template_part_controller = new Controller();
+new Controller();

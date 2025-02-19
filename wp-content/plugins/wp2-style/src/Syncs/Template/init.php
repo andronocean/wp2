@@ -13,26 +13,6 @@ class Controller
     private $templates = [];
 
     /**
-     * Constructor.
-     *
-     * Hooks into WordPress.
-     */
-    public function __construct()
-    {
-        add_action('init', [$this, 'init'], 101);
-    }
-
-    /**
-     * Initializes the template sync.
-     *
-     * @return void
-     */
-    public function init(): void
-    {
-        $this->execute_sync();
-    }
-
-    /**
      * Execute the template sync process.
      *
      * Queries the taxonomy terms and creates HTML files in the theme's
@@ -117,18 +97,7 @@ class Controller
         $slug       = $template['slug'];
         $name       = $template['name'];
         $term_id    = $template['id'];
-        $class_name = "wp2-root";
-
-        $lock = ['move' => false, 'remove' => false];
-
-        $option = [
-            'value' => $slug,
-            'label' => $name
-        ];
-
-        $metadata = [
-            'name' => $name
-        ];
+        $class_name = "wp2-layout";
 
         $attributes = [
             "className" => $class_name,
@@ -138,17 +107,6 @@ class Controller
             "blockstudio" => [
                 "attributes" => [
                     "0" => "o",
-                    "slug" => $slug,
-                    "lock" => $lock,
-                    "className" => $class_name,
-                    "blockstudio" => [
-                        "data" => [
-                            "option" => [
-                                "value" => $slug,
-                                "label" => $name
-                            ]
-                        ]
-                    ],
                     "option" => [
                         "value" => $slug,
                         "label" => $name
@@ -172,7 +130,7 @@ class Controller
     private function markup_template_part(array $attributes, string $inner_content = ''): string
     {
         return sprintf(
-            "<!-- wp:wp2/root %s -->%s<!-- /wp:wp2/root -->",
+            "<!-- wp:wp2/layout %s -->%s<!-- /wp:wp2/layout -->",
             json_encode($attributes, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT),
             $inner_content
         );
@@ -197,23 +155,50 @@ class Controller
                     'terms'    => $template_slug,
                 ],
             ],
-            'orderby' => 'menu_order',
-            'order' => 'ASC',
         ]);
 
+        $posts_by_zone_order = [];
+
         foreach ($posts as $post) {
+            $zones = get_the_terms($post->ID, 'wp2_style_theme_area');
 
-            $template_part = get_post_meta($post->ID, 'wp2_style_entity_template_part', true);
+            if (!empty($zones) && is_array($zones)) {
+                $zone_id = $zones[0]->term_id;
+                $order = (int) get_term_meta($zone_id, 'wp2_style_order', true);
+                $posts_by_zone_order[$order][] = $post;
+            }
+        }
 
-            $attributes = [
-                'slug' => $template_part,
-                'lock' => ['move' => false, 'remove' => false],
-            ];
+        // Sort by order key (ascending)
+        ksort($posts_by_zone_order, SORT_NUMERIC);
 
-            $template_parts_markup .= sprintf(
-                '<!-- wp:template-part %s --><!-- /wp:template-part -->',
-                json_encode($attributes, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT),
-            );
+        foreach ($posts_by_zone_order as $ordered_posts) {
+            foreach ($ordered_posts as $post) {
+                $template_part = get_post_meta($post->ID, 'wp2_style_entity_template_part', true);
+
+                $name = get_the_title($post->ID);
+
+                $lock = ['move' => false, 'remove' => false];
+
+                $attributes = [
+                    'slug' => $template_part,
+                    'lock' => $lock,
+                    "metadata" => [
+                        "name" => $name
+                    ],
+                    "blockstudio" => [
+                        "attributes" => [
+                            "0" => "o",
+                            "slug" => $template_part
+                        ]
+                    ]
+                ];
+
+                $template_parts_markup .= sprintf(
+                    '<!-- wp:template-part %s --><!-- /wp:template-part -->',
+                    json_encode($attributes, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT)
+                );
+            }
         }
 
         return $template_parts_markup;

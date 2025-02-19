@@ -1,0 +1,84 @@
+{
+    "$schema": "https://app.blockstudio.dev/schema",
+    "apiVersion": 2,
+    "name": "wp2/primary-main",
+    "title": "Primary Main",
+    "category": "wp2-style",
+    "icon": "align-full-width",
+    "description": "The focal content area within the primary zone, containing the key query or article.",
+    "parent": [
+        "core/template-part"
+    ],
+    "attributes": {
+        "className": {
+            "type": "string",
+            "default": ""
+        },
+        "metadata": {
+            "type": "object",
+            "default": {
+                "name": "Primary Main"
+            }
+        },
+        "lock": {
+            "type": "object",
+            "default": {
+                "move": true,
+                "remove": true
+            }
+        },
+        "layout": {
+            "type": "object",
+            "default": {
+                "type": "constrained"
+            }
+        },
+        "align": {
+            "type": "string",
+            "default": "full"
+        }
+    },
+    "supports": {
+        "className": false,
+        "customClassName": false,
+        "renaming": true,
+        "reusable": false,
+        "lock": true,
+        "html": false,
+        "inserter": false,
+        "multiple": false,
+        "align": [
+            "full"
+        ]
+    },
+    "blockstudio": {
+        "attributes": [
+            {
+                "id": "option",
+                "type": "select",
+                "label": "Option",
+                "allowNull": "Select Option",
+                "options": [
+                    {
+                        "label": "Default",
+                        "value": "0",
+                        "innerBlocks": [
+                            {
+                                "name": "core/group",
+                                "attributes": {
+                                    "metadata": {
+                                        "name": "Default"
+                                    },
+                                    "layout": {
+                                        "type": "constrained"
+                                    },
+                                    "align": "full"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}

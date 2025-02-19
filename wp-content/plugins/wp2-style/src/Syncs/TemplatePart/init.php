@@ -20,26 +20,6 @@ class Controller
     private $template_parts = [];
 
     /**
-     * Constructor.
-     *
-     * Hooks into WordPress.
-     */
-    public function __construct()
-    {
-        add_action('init', [$this, 'init'], 101);
-    }
-
-    /**
-     * Initializes the template part sync.
-     *
-     * @return void
-     */
-    public function init(): void
-    {
-        $this->execute_sync();
-    }
-
-    /**
      * Execute the template part sync process.
      *
      * Queries the posts and creates HTML files in the theme's
@@ -154,45 +134,50 @@ class Controller
     private function build_block(array $part): string
     {
         $wrapper_attributes = $this->get_wrapper_attributes($part);
-        $content_attributes = $this->get_content_attributes($part);
 
-        $content = $this->generate_inner_content($part, $content_attributes);
+        $zone_area = $part['zone_area'];
+
+        $tag = 'wp:wp2/' . $zone_area;
 
         return sprintf(
-            '<!-- wp:group %s --><div class="wp-block-group">%s</div><!-- /wp:group -->',
+            '<!-- %s %s --><!-- /%s -->',
+            $tag,
             json_encode($wrapper_attributes, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT),
-            $content
+            $tag
         );
-    }
-
-    private function generate_inner_content(array $part, array $content_attributes): string
-    {
-        $content = $part['content'] ?? '';
-        return sprintf(
-            $content,
-            json_encode($content_attributes, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT),
-            ''
-        );
-    }
-
-    private function get_content_attributes(array $part): array
-    {
-        return [
-            'lock' => ['move' => false, 'remove' => false],
-        ];
     }
 
     private function get_wrapper_attributes(array $part): array
     {
-        $name       = $part['name'] ?? $part['slug'];
         $class_name = $this->get_class_name($part);
+        $lock      = ['move' => true, 'remove' => true];
+
+        $template_name = $part['template'];
+        $area_name     = $part['area'];
+
+        $name = $template_name . ' ' . $area_name;
+
+        $name = str_replace('-', ' ', strtolower($name));
+
+        $name = ucwords($name);
+
         return [
-            'lock'      => ['move' => true, 'remove' => true],
+            'lock'      => $lock,
             'className' => $class_name,
             'metadata'  => [
-                'name' => 'Template Content',
+                'name' => $name,
             ],
+            'align'     => 'full',
             'layout'    => ['type' => 'constrained'],
+            'blockstudio' => [
+                'attributes' => [
+                    "0" => "o",
+                    'option' => [
+                        'value' => '',
+                        'label' => '',
+                    ],
+                ],
+            ],
         ];
     }
 

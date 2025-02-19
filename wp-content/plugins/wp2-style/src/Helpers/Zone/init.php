@@ -125,5 +125,4 @@ class Controller
     }
 }
 
-$zone_controller = new Controller();
-$zone_controller->init();
+new Controller();

@@ -1,0 +1,25 @@
+{
+    "$schema": "https://app.blockstudio.dev/schema/blockstudio",
+    "users": {
+        "ids": [
+            1
+        ],
+        "roles": []
+    },
+    "assets": {
+        "enqueue": true,
+        "minify": {
+            "css": false,
+            "js": false
+        },
+        "process": {
+            "scss": false
+        }
+    },
+    "editor": {
+        "formatOnSave": false,
+        "assets": [],
+        "markup": false
+    },
+    "library": false
+}

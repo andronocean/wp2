@@ -197,4 +197,5 @@ class Controller
         return $layouts;
     }
 }
-$layout_controller = new Controller();
+
+new Controller();

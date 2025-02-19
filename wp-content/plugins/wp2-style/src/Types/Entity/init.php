@@ -46,9 +46,10 @@ class Controller
      * @var array
      */
     private array $single_labels = [
+        'all_items'   => 'Parts',
         'archive_name' => 'Style',
-        'singular'     => 'Entity',
-        'plural'       => 'Entities',
+        'singular'     => 'Part',
+        'plural'       => 'Parts',
     ];
 
     /**
@@ -117,6 +118,7 @@ class Controller
             'plural'      => $this->single_labels['plural'],
             'singular'    => $this->single_labels['singular'],
             'menu_name'   => $this->single_labels['archive_name'],
+            'all_items'   => $this->single_labels['all_items'],
             'text_domain' => $this->text_domain,
         ]);
 
@@ -143,6 +145,7 @@ class Controller
         $plural      = $label_args['plural'];
         $singular    = $label_args['singular'];
         $menu_name   = $label_args['menu_name'];
+        $all_items   = $label_args['all_items'];
         $text_domain = $label_args['text_domain'];
 
         return [
@@ -155,7 +158,7 @@ class Controller
             'new_item'           => __('New ' . $singular, $text_domain),
             'edit_item'          => __('Edit ' . $singular, $text_domain),
             'view_item'          => __('View ' . $singular, $text_domain),
-            'all_items'          => __($plural, $text_domain),
+            'all_items'          => __($all_items, $text_domain),
             'search_items'       => __('Search ' . $plural, $text_domain),
             'parent_item_colon'  => __('Parent ' . $plural . ':', $text_domain),
             'not_found'          => __('No ' . $plural . ' found.', $text_domain),
@@ -199,6 +202,18 @@ class Controller
             'hierarchical'       => true,
             'rest_base'          => $this->rest_base,
             'rest_namespace'     => $this->rest_namespace,
+            'capability_type'    => 'post',
+            'capabilities'       => [
+                'create_posts'       => false,
+                'edit_post'          => 'manage_options',
+                'read_post'          => 'read_post',
+                'delete_post'        => 'manage_options',
+                'edit_posts'         => 'manage_options',
+                'edit_others_posts'  => 'manage_options',
+                'delete_posts'       => 'manage_options',
+                'publish_posts'      => 'manage_options',
+                'read_private_posts' => 'manage_options',
+            ],
             'supports'           => [
                 'title',
                 'editor',
