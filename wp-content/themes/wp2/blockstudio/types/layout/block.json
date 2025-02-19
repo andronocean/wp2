@@ -1,0 +1,357 @@
+{
+    "$schema": "https://app.blockstudio.dev/schema",
+    "apiVersion": 2,
+    "name": "wp2/layout",
+    "title": "Layout",
+    "category": "wp2-style",
+    "icon": "layout",
+    "description": "Display the template parts according to the layout.",
+    "supports": {
+        "className": false,
+        "customClassName": false,
+        "renaming": true,
+        "reusable": false,
+        "multiple": false,
+        "lock": true,
+        "html": false,
+        "inserter": true
+    },
+    "attributes": {
+        "className": {
+            "type": "string",
+            "default": "wp2-root wp2-root--index"
+        },
+        "metadata": {
+            "type": "object",
+            "default": {
+                "name": "Index: Root"
+            }
+        },
+        "templateLock": {
+            "type": "string",
+            "default": "all"
+        },
+        "lock": {
+            "type": "object",
+            "default": {
+                "move": true,
+                "remove": true
+            }
+        },
+        "layout": {
+            "type": "object",
+            "default": {
+                "type": "flex",
+                "alignItems": "stretch",
+                "flexWrap": "nowrap",
+                "justifyContent": "stretch",
+                "verticalAlignment": "space-between",
+                "orientation": "vertical",
+                "flexDirection": "column"
+            }
+        },
+        "style": {
+            "type": "object",
+            "default": {
+                "dimensions": {
+                    "minHeight": "100vh"
+                },
+                "spacing": {
+                    "padding": {
+                        "top": "0",
+                        "right": "0",
+                        "bottom": "0",
+                        "left": "0"
+                    },
+                    "margin": {
+                        "top": "0",
+                        "right": "0",
+                        "bottom": "0",
+                        "left": "0"
+                    },
+                    "blockGap": "0"
+                }
+            }
+        }
+    },
+    "allowedBlocks": [
+        "core/template-part"
+    ],
+    "blockstudio": {
+        "attributes": [
+            {
+                "id": "option",
+                "type": "select",
+                "label": "Layout",
+                "allowNull": "Select Layout",
+                "stylisedUi": true,
+                "options": [
+                    {
+                        "value": "404",
+                        "label": "Page: 404",
+                        "innerBlocks": [
+                            {
+                                "name": "core/template-part",
+                                "attributes": {
+                                    "slug": "root-header-part-404"
+                                }
+                            },
+                            {
+                                "name": "core/template-part",
+                                "attributes": {
+                                    "slug": "root-main-part-404"
+                                }
+                            },
+                            {
+                                "name": "core/template-part",
+                                "attributes": {
+                                    "slug": "root-footer-part-404"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "value": "archive",
+                        "label": "Archive",
+                        "innerBlocks": [
+                            {
+                                "name": "core/template-part",
+                                "attributes": {
+                                    "slug": "root-header-part-archive"
+                                }
+                            },
+                            {
+                                "name": "core/template-part",
+                                "attributes": {
+                                    "slug": "root-main-part-archive"
+                                }
+                            },
+                            {
+                                "name": "core/template-part",
+                                "attributes": {
+                                    "slug": "root-footer-part-archive"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "value": "attachment",
+                        "label": "Attachment",
+                        "innerBlocks": [
+                            {
+                                "name": "core/template-part",
+                                "attributes": {
+                                    "slug": "root-header-part-attachment"
+                                }
+                            },
+                            {
+                                "name": "core/template-part",
+                                "attributes": {
+                                    "slug": "root-main-part-attachment"
+                                }
+                            },
+                            {
+                                "name": "core/template-part",
+                                "attributes": {
+                                    "slug": "root-footer-part-attachment"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "value": "author",
+                        "label": "Author",
+                        "innerBlocks": [
+                            {
+                                "name": "core/template-part",
+                                "attributes": {
+                                    "slug": "root-header-part-author"
+                                }
+                            },
+                            {
+                                "name": "core/template-part",
+                                "attributes": {
+                                    "slug": "root-main-part-author"
+                                }
+                            },
+                            {
+                                "name": "core/template-part",
+                                "attributes": {
+                                    "slug": "root-footer-part-author"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "value": "date",
+                        "label": "Date",
+                        "innerBlocks": [
+                            {
+                                "name": "core/template-part",
+                                "attributes": {
+                                    "slug": "root-header-part-date"
+                                }
+                            },
+                            {
+                                "name": "core/template-part",
+                                "attributes": {
+                                    "slug": "root-main-part-date"
+                                }
+                            },
+                            {
+                                "name": "core/template-part",
+                                "attributes": {
+                                    "slug": "root-footer-part-date"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "value": "front-page",
+                        "label": "Front Page",
+                        "innerBlocks": [
+                            {
+                                "name": "core/template-part",
+                                "attributes": {
+                                    "slug": "root-header-part-front-page"
+                                }
+                            },
+                            {
+                                "name": "core/template-part",
+                                "attributes": {
+                                    "slug": "root-main-part-front-page"
+                                }
+                            },
+                            {
+                                "name": "core/template-part",
+                                "attributes": {
+                                    "slug": "root-footer-part-front-page"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "value": "index",
+                        "label": "Index",
+                        "innerBlocks": [
+                            {
+                                "name": "core/template-part",
+                                "attributes": {
+                                    "slug": "root-header-part-index"
+                                }
+                            },
+                            {
+                                "name": "core/template-part",
+                                "attributes": {
+                                    "slug": "root-main-part-index"
+                                }
+                            },
+                            {
+                                "name": "core/template-part",
+                                "attributes": {
+                                    "slug": "root-footer-part-index"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "value": "page",
+                        "label": "Page",
+                        "innerBlocks": [
+                            {
+                                "name": "core/template-part",
+                                "attributes": {
+                                    "slug": "root-header-part-page"
+                                }
+                            },
+                            {
+                                "name": "core/template-part",
+                                "attributes": {
+                                    "slug": "root-main-part-page"
+                                }
+                            },
+                            {
+                                "name": "core/template-part",
+                                "attributes": {
+                                    "slug": "root-footer-part-page"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "value": "search",
+                        "label": "Search",
+                        "innerBlocks": [
+                            {
+                                "name": "core/template-part",
+                                "attributes": {
+                                    "slug": "root-header-part-search"
+                                }
+                            },
+                            {
+                                "name": "core/template-part",
+                                "attributes": {
+                                    "slug": "root-main-part-search"
+                                }
+                            },
+                            {
+                                "name": "core/template-part",
+                                "attributes": {
+                                    "slug": "root-footer-part-search"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "value": "single",
+                        "label": "Single",
+                        "innerBlocks": [
+                            {
+                                "name": "core/template-part",
+                                "attributes": {
+                                    "slug": "root-header-part-single"
+                                }
+                            },
+                            {
+                                "name": "core/template-part",
+                                "attributes": {
+                                    "slug": "root-main-part-single"
+                                }
+                            },
+                            {
+                                "name": "core/template-part",
+                                "attributes": {
+                                    "slug": "root-footer-part-single"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "value": "taxonomy",
+                        "label": "Taxonomy",
+                        "innerBlocks": [
+                            {
+                                "name": "core/template-part",
+                                "attributes": {
+                                    "slug": "root-header-part-taxonomy"
+                                }
+                            },
+                            {
+                                "name": "core/template-part",
+                                "attributes": {
+                                    "slug": "root-main-part-taxonomy"
+                                }
+                            },
+                            {
+                                "name": "core/template-part",
+                                "attributes": {
+                                    "slug": "root-footer-part-taxonomy"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}
