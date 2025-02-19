@@ -43,10 +43,11 @@ class Controller
             'description' => 'The layouts in the theme.'
         ],
         'part' => [
-            'name'        => 'Parts',
-            'singular'    => 'Part',
+            'name'        => 'Part Blocks',
+            'singular'    => 'Part Block',
             'slug'        => 'theme-parts',
-            'description' => 'The parts in the theme.'
+            'description' => 'The parts in the theme.',
+            'menu_name'   => 'Blocks',
         ],
         'template' => [
             'name'        => 'Templates',
@@ -93,7 +94,8 @@ class Controller
                 $taxonomy['name'],      // Plural name.
                 $taxonomy['singular'],  // Singular name.
                 $taxonomy['slug'],      // Rewrite slug.
-                $taxonomy['description']
+                $taxonomy['description'],
+                $taxonomy['menu_name'] ?? $taxonomy['name']
             );
             // Build the taxonomy name using the prefix and the key.
             register_taxonomy($this->prefix . $key, $this->post_types, $args);
@@ -107,7 +109,7 @@ class Controller
      * @param string $plural   Plural name.
      * @return array Associative array of taxonomy labels.
      */
-    private function set_labels(string $singular, string $plural): array
+    private function set_labels(string $singular, string $plural, string $menu_name): array
     {
         $text_domain = $this->text_domain;
 
@@ -122,7 +124,7 @@ class Controller
             'update_item'       => __('Update ' . $singular, $text_domain),
             'add_new_item'      => __('Add New ' . $singular, $text_domain),
             'new_item_name'     => __('New ' . $singular . ' Name', $text_domain),
-            'menu_name'         => __($plural, $text_domain),
+            'menu_name'         => __($menu_name, $text_domain),
         ];
     }
 
@@ -135,9 +137,9 @@ class Controller
      * @param string $description
      * @return array Associative array of taxonomy arguments.
      */
-    private function set_args(string $plural, string $singular, string $slug, string $description): array
+    private function set_args(string $plural, string $singular, string $slug, string $description, string $menu_name): array
     {
-        $labels = $this->set_labels($singular, $plural);
+        $labels = $this->set_labels($singular, $plural, $menu_name);
 
         return [
             'labels'            => $labels,

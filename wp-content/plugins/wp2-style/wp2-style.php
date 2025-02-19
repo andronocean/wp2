@@ -79,8 +79,7 @@ class Module
     private function define_directories(): void
     {
         $this->directories = [
-            WP2_STYLE_DIR . '/src/Blocks/Extensions',
-            WP2_STYLE_DIR . '/src/Blocks/Types',
+            WP2_STYLE_DIR . '/src/Blocks',
             WP2_STYLE_DIR . '/src/Helpers',
             WP2_STYLE_DIR . '/src/Syncs',
             WP2_STYLE_DIR . '/src/Settings',

@@ -124,5 +124,4 @@ class Controller
     }
 }
 
-$area_controller = new Controller();
-$area_controller->init();
+new Controller();

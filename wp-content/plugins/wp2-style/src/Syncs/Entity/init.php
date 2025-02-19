@@ -177,6 +177,3 @@ class Controller
         }
     }
 }
-
-// Instantiate the plugin sync controller.
-new Controller();
